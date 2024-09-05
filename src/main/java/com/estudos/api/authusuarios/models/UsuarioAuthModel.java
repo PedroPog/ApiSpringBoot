@@ -1,9 +1,6 @@
 package com.estudos.api.authusuarios.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,16 +13,13 @@ import java.util.UUID;
 public class UsuarioAuthModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID idusuario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idusuario;
 
     @Column(unique = true,length = 20,nullable = false)
-    @NotBlank(message = "O usuario não pode estar em branco!")
-    @NotNull(message = "O usuario não pode estar vazio!")
-    @NotEmpty(message = "Teste")
     private String usuario;
 
-    @Column(nullable = false,length = 6)
+    @Column(nullable = false)
     private String senha;
 
     @Column(nullable = false)

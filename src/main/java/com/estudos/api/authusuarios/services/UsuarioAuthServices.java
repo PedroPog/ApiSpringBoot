@@ -1,4 +1,4 @@
-package com.estudos.api.authusuarios;
+package com.estudos.api.authusuarios.services;
 
 import com.estudos.api.authusuarios.models.UsuarioAuthModel;
 import com.estudos.api.authusuarios.repository.UsuarioAuthRepository;

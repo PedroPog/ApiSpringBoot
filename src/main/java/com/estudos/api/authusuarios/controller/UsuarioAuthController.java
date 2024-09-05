@@ -1,6 +1,6 @@
 package com.estudos.api.authusuarios.controller;
 
-import com.estudos.api.authusuarios.UsuarioAuthServices;
+import com.estudos.api.authusuarios.services.UsuarioAuthServices;
 import com.estudos.api.authusuarios.models.UsuarioAuthModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
