@@ -31,4 +31,11 @@ public class MsgModel {
 
     @Column(name = "grupo_id")
     private UUID grupoId;
+
+    @PrePersist
+    protected void onCreate() {
+        if (dataEnvio == null) {
+            dataEnvio = LocalDateTime.now();
+        }
+    }
 }
