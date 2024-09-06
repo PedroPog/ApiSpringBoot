@@ -13,8 +13,9 @@ import java.util.UUID;
 public class UsuarioAuthModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idusuario;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", columnDefinition = "uuid")
+    private UUID idusuario;
 
     @Column(unique = true,length = 20,nullable = false)
     private String usuario;

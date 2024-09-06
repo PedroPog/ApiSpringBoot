@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface UsuarioAuthRepository extends JpaRepository<UsuarioAuthModel, Long> {
+import java.util.UUID;
+
+public interface UsuarioAuthRepository extends JpaRepository<UsuarioAuthModel, UUID> {
 
     UsuarioAuthModel findByUsuario(String usuario);
 }
