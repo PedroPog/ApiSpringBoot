@@ -1,6 +1,8 @@
 package com.estudos.api.authusuarios.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,13 +20,19 @@ public class UsuarioAuthModel {
     private UUID idusuario;
 
     @Column(unique = true,length = 20,nullable = false)
+    @NotNull(message = "Usuario não pode ser null!")
     private String usuario;
 
     @Column(nullable = false)
     private String senha;
 
     @Column(nullable = false)
-    private TipoStatus status = TipoStatus.OFFLINE;
+    @Email(message = "Email deve ser válido!")
+    @NotNull(message = "Email não pode ser vazio!")
+    private String email;
+
+    @Column(nullable = false)
+    private TipoRole role = TipoRole.USUARIO;
 
     public void setUsuario(String usuario){
         this.usuario = usuario.trim().toLowerCase();

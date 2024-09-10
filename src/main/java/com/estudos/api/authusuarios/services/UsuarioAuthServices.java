@@ -1,6 +1,7 @@
 package com.estudos.api.authusuarios.services;
 
 import com.estudos.api.authusuarios.models.UsuarioAuthModel;
+import com.estudos.api.authusuarios.models.UsuarioDto;
 import com.estudos.api.authusuarios.repository.UsuarioAuthRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,22 @@ public class UsuarioAuthServices {
         UsuarioAuthModel existUsuario = usuarioAuthRepository.findByUsuario(model.getUsuario());
         if(existUsuario != null){
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Já existe um usuario com esse login!\n:"+model.getUsuario());
+                    .body("Já existe um usuario com esse login!: "+model.getUsuario());
+        }
+        UsuarioAuthModel existEmail = usuarioAuthRepository.findByEmail(model.getEmail());
+        if(existEmail!=null){
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Já existe um usuario com esse email!: "+model.getEmail());
         }
         model.setSenha(encoder.encode(model.getSenha()));
         model = usuarioAuthRepository.save(model);
+        UsuarioDto usuarioDto = new UsuarioDto();
+        usuarioDto.setUsuario(model.getUsuario());
+        usuarioDto.setEmail(model.getEmail());
+        usuarioDto.setIdusuario(model.getIdusuario());
+        usuarioDto.setRole(model.getRole());
         return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body(model);
+                .body(usuarioDto);
     }
 
     public ResponseEntity<?> validarSenha(String usuario,String senha){
@@ -53,7 +64,12 @@ public class UsuarioAuthServices {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("Senha Incorreta!");
         }
+        UsuarioDto usuarioDto = new UsuarioDto();
+        usuarioDto.setUsuario(model.getUsuario());
+        usuarioDto.setEmail(model.getEmail());
+        usuarioDto.setIdusuario(model.getIdusuario());
+        usuarioDto.setRole(model.getRole());
         return ResponseEntity.status(HttpStatus.OK)
-                .body(model);
+                .body(usuarioDto);
     }
 }
